@@ -25,8 +25,8 @@ export default function Landing() {
           Adaptive Multi-Agent Dynamic Routing Visualizer
         </h2>
         <p className="mt-8 text-lg text-text-secondary max-w-3xl mx-auto">
-          Powered by the <span className="text-accent-blue font-semibold">PathFuel Engine v1.0</span> and guided by our AI co-pilot{' '}
-          <span className="text-accent-red font-semibold">RushBot</span>, demonstrating how modern pathfinding algorithms solve real-time urban congestion.
+          Powered by the <span className="text-blue-400 font-semibold">PathFuel Engine v1.0</span> and guided by our AI co-pilot{' '}
+          <span className="text-red-500 font-semibold">RushBot</span>, demonstrating how modern pathfinding algorithms solve real-time urban congestion.
         </p>
       </motion.div>
 
