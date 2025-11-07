@@ -115,44 +115,14 @@ Hosting / Deployment	Vercel
 Data (Optional)	OpenTraffic, CityFlow
 
 
-RushGrid/
-│
-├── src/
-│   ├── components/
-│   │   ├── Grid.jsx
-│   │   ├── RushBot.jsx
-│   │   ├── AnalyticsPanel.jsx
-│   │   └── Controls.jsx
-│   │
-│   ├── engine/
-│   │   ├── AStar.js
-│   │   ├── BiAStar.js
-│   │   ├── DynamicAStar.js
-│   │   └── PathFuelEngine.js
-│   │
-│   ├── App.jsx
-│   └── main.jsx
-│
-├── public/
-│   ├── favicon.ico
-│   └── index.html
-│
-├── vite.config.js
-└── package.json
 
 
-🧮 How It Works
-
+🧮 **How It Works**
 The PathFuel Engine computes optimal routes using A* variants.
-
 The UI grid visualizes nodes ↔ edges in real time.
-
 When a user or RushBot adds congestion, Dynamic A* recomputes paths.
-
 Efficiency metrics update automatically in the Analytics Panel.
-
 The Predictive Heatmap forecasts future congestion using time-weighted averages.
-
 RushBot provides live commentary, explanation, and control.
 
 📦 Installation & Development
