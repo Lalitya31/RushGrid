@@ -1,14 +1,43 @@
 import { useNavigate } from 'react-router-dom';
 import { Activity, Navigation, Brain, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
+import React, { useMemo } from 'react';
 
 export default function Landing() {
   const navigate = useNavigate();
 
+  const dots = useMemo(() => {
+    return Array.from({ length: 180 }).map((_, i) => {
+      const left = Math.round(Math.random() * 100);
+      const top = Math.round(Math.random() * 100);
+      const size = Math.random() * 8 + 3; // 3px - 11px (larger)
+      const delay = Math.random() * 3; // shorter random delay
+      const duration = 3 + Math.random() * 3; // faster: 3s - 6s
+      const opacity = 0.18 + Math.random() * 0.42; // stronger visibility
+      return { id: i, left, top, size, delay, duration, opacity };
+    });
+  }, []);
+
   return (
     <div className="min-h-screen bg-bg-primary relative overflow-hidden flex flex-col items-center justify-center px-4">
-      {/* Animated particles */}
-      <Particles />
+      {/* floating red dots background */}
+      <div className="dots-layer" aria-hidden>
+        {dots.map((d) => (
+          <div
+            key={d.id}
+            className="dot"
+            style={{
+              left: `${d.left}%`,
+              top: `${d.top}%`,
+              width: `${d.size}px`,
+              height: `${d.size}px`,
+              animationDelay: `${d.delay}s`,
+              animationDuration: `${d.duration}s`,
+              opacity: d.opacity,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Hero */}
       <motion.div
@@ -38,30 +67,37 @@ export default function Landing() {
         className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 max-w-5xl z-10"
       >
         <FeatureCard
-          icon={<Activity className="w-8 h-8 text-accent-red" />}
+          className="glass-card box-blue"
+          icon={<Activity className="w-8 h-8 text-accent-blue" />}
           title="A*, Bi-A*, Dynamic A*"
           description="Advanced pathfinding algorithms that adapt to real-time traffic"
         />
         <FeatureCard
-          icon={<Navigation className="w-8 h-8 text-accent-blue" />}
+          className="glass-card box-red"
+          icon={<Navigation className="w-8 h-8 text-accent-red" />}
           title="Multi-Agent System"
           description="Autonomous vehicles with unique personalities and routing strategies"
         />
         <FeatureCard
-          icon={<Brain className="w-8 h-8 text-accent-purple" />}
+          className="glass-card box-gold"
+          icon={<Brain className="w-8 h-8 text-accent-gold" />}
           title="RushBot AI Co-Pilot"
           description="Intelligent assistant that narrates, explains, and controls simulations"
         />
       </motion.div>
 
       {/* CTA - Punching Red Button */}
-      <button
-        onClick={() => navigate('/simulation')}
-        className="mt-12 px-8 py-4 bg-accent-red text-white font-display text-lg rounded-lg shadow-lg flex items-center gap-2 z-10 btn-punch cursor-pointer hover:scale-110 transition-transform"
-      >
-        <Zap className="w-5 h-5" />
-        Launch Simulation
-      </button>
+      <div className="mt-12 z-10">
+        <div className="launch-box inline-block">
+          <button
+            onClick={() => navigate('/simulation')}
+            className="px-8 py-4 bg-accent-red text-white font-display text-lg rounded-lg shadow-lg flex items-center gap-2 btn-punch cursor-pointer hover:scale-110 transition-transform"
+          >
+            <Zap className="w-5 h-5" />
+            Launch Simulation
+          </button>
+        </div>
+      </div>
 
       <p className="mt-8 text-sm text-text-muted z-10">
         Click anywhere on the grid to block roads • Spawn agents • Watch adaptive routing in action
@@ -70,34 +106,22 @@ export default function Landing() {
   );
 }
 
-function FeatureCard({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) {
+function FeatureCard({
+  icon,
+  title,
+  description,
+  className,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+  className?: string;
+}) {
   return (
-    <motion.div
-      whileHover={{ y: -5, boxShadow: 'var(--shadow-glow-purple)' }}
-      className="glass-card p-6 text-center"
-    >
+    <motion.div whileHover={{ y: -5 }} className={`${className ?? ''} p-6 text-center`}>
       <div className="flex justify-center mb-4">{icon}</div>
       <h3 className="font-display text-xl mb-2">{title}</h3>
       <p className="text-text-secondary text-sm">{description}</p>
     </motion.div>
-  );
-}
-
-function Particles() {
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {Array.from({ length: 50 }).map((_, i) => (
-        <div
-          key={i}
-          className="particle"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 3}s`,
-            animationDuration: `${3 + Math.random() * 2}s`,
-          }}
-        />
-      ))}
-    </div>
   );
 }
