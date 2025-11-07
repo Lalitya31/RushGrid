@@ -115,7 +115,6 @@ Hosting / Deployment	Vercel
 Data (Optional)	OpenTraffic, CityFlow
 
 
-**⚙️ Project Structure**
 RushGrid/
 │
 ├── src/
@@ -124,11 +123,13 @@ RushGrid/
 │   │   ├── RushBot.jsx
 │   │   ├── AnalyticsPanel.jsx
 │   │   └── Controls.jsx
+│   │
 │   ├── engine/
 │   │   ├── AStar.js
 │   │   ├── BiAStar.js
 │   │   ├── DynamicAStar.js
 │   │   └── PathFuelEngine.js
+│   │
 │   ├── App.jsx
 │   └── main.jsx
 │
@@ -138,6 +139,7 @@ RushGrid/
 │
 ├── vite.config.js
 └── package.json
+
 
 🧮 How It Works
 
