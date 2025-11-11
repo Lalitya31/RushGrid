@@ -125,22 +125,6 @@ Efficiency metrics update automatically in the Analytics Panel.
 The Predictive Heatmap forecasts future congestion using time-weighted averages.
 RushBot provides live commentary, explanation, and control.
 
-📦 Installation & Development
-# Clone repo
-git clone https://github.com/Lalitya31/RushGrid.git
-cd RushGrid
-
-# Install dependencies
-npm install
-
-# Run locally
-npm run dev
-
-# Build for production
-npm run build
-
-# Deploy manually (Vercel CLI)
-vercel --prod
 
 🌍**Future Enhancements**
 🔗 Live GPS / IoT sensor data integration
