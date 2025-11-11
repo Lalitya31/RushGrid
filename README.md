@@ -1,10 +1,10 @@
-# RushGrid : 🔗 https://rushgrid-app.vercel.app
+# RushGrid : 🔗 [https://rushgrid-app.vercel.app](https://rushgridfinal.vercel.app/)
 RushGrid- an adaptive multi-agent urban traffic routing simulator powered by A* , Bi-A* and Dynamic A* algorithms with real-time predictive re-routing, guided by our Ai co-pilot RushBot, built to help city planners , everyday travelers and millennials to save their time and work.
 🏎️ RushGrid: Adaptive Multi-Agent Dynamic Routing Visualizer
 Powered by the PathFuel Engine v1.0 and guided by our AI co-pilot RushBot,
 RushGrid demonstrates how modern pathfinding algorithms, real-time adaptation, and smart UI/UX design can tackle the chaos of urban congestion — one route at a time.
 
-🔗 [Live Demo](https://rushgrid-app.vercel.app)
+🔗 [Live Demo](https://rushgridfinal.vercel.app/)
 
 🧠 **Concept Overview**
 RushGrid is an interactive traffic simulation web app that visualizes multiple autonomous agents (vehicles) navigating a live, adaptive city grid.
