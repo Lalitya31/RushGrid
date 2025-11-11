@@ -137,3 +137,8 @@ RushGrid isn’t just a visual demo — it’s a story of adaptive intelligence.
 By combining pathfinding algorithms, AI-driven UX, and a beautiful, kinetic interface, it shows how computation and design can merge to create a living, thinking simulation.
 
 ⚡ Simulation complete. All agents optimized.
+
+## 👥 Authors
+- **Lalitya Dodla** — [@Lalitya31](https://github.com/Lalitya31)  
+- **Puneeth Reddy T** — [@Puneethreddy2530](https://github.com/Puneethreddy2530)
+
