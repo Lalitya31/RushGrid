@@ -139,6 +139,6 @@ By combining pathfinding algorithms, AI-driven UX, and a beautiful, kinetic inte
 ⚡ Simulation complete. All agents optimized.
 
 ## 👥 Authors
-- **Lalitya Dodla** — [@Lalitya31](https://github.com/Lalitya31)  
-- **Puneeth Reddy T** — [@Puneethreddy2530](https://github.com/Puneethreddy2530)
+**[@Lalitya31]**(https://github.com/Lalitya31)  
+**[@Puneethreddy2530]**(https://github.com/Puneethreddy2530)
 
