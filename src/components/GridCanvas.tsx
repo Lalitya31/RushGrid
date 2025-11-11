@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Agent } from '../types/agent';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { ZoomIn, ZoomOut, RotateCcw } from 'lucide-react';
 
 interface Zone {
   x: { min: number; max: number };
@@ -22,6 +23,12 @@ interface GridCanvasProps {
 export default function GridCanvas({ gridSize, obstacles, setObstacles, agents, sourceZone, destinationZone, selectMode = 'none', onSelectCell }: GridCanvasProps) {
   const [agentTrails, setAgentTrails] = useState<Map<string, Array<{ x: number; y: number }>>>(new Map());
   const [hovered, setHovered] = useState<{ x: number; y: number } | null>(null);
+  const [zoom, setZoom] = useState(1);
+  const [pan, setPan] = useState({ x: 0, y: 0 });
+  const [isPanning, setIsPanning] = useState(false);
+  const [panStart, setPanStart] = useState({ x: 0, y: 0 });
+  const gridContainerRef = useRef<HTMLDivElement>(null);
+  const cellSize = 20;
 
   // Track agent trails
   useEffect(() => {
@@ -41,6 +48,41 @@ export default function GridCanvas({ gridSize, obstacles, setObstacles, agents, 
 
     setAgentTrails(newTrails);
   }, [agents]);
+
+  // Handle zoom with mouse wheel
+  const handleWheel = (e: React.WheelEvent) => {
+    e.preventDefault();
+    const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
+    setZoom((prev) => Math.min(Math.max(prev * zoomFactor, 0.5), 4));
+  };
+
+  // Handle panning
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (e.button === 2 || e.ctrlKey) { // Right click or Ctrl+left click for pan
+      setIsPanning(true);
+      setPanStart({ x: e.clientX - pan.x, y: e.clientY - pan.y });
+    }
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isPanning) {
+      setPan({
+        x: e.clientX - panStart.x,
+        y: e.clientY - panStart.y,
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsPanning(false);
+  };
+
+  const handleZoomIn = () => setZoom((prev) => Math.min(prev * 1.2, 4));
+  const handleZoomOut = () => setZoom((prev) => Math.max(prev / 1.2, 0.5));
+  const handleResetView = () => {
+    setZoom(1);
+    setPan({ x: 0, y: 0 });
+  };
 
   const handleCellClick = (x: number, y: number, isRightClick: boolean) => {
     // If selection mode is active, use selection callback instead of toggling obstacles
@@ -62,7 +104,35 @@ export default function GridCanvas({ gridSize, obstacles, setObstacles, agents, 
   };
 
   return (
-    <div className="flex-1 p-4 overflow-auto bg-[#0d0d0d]">
+    <div className="flex-1 p-4 overflow-hidden bg-[#0d0d0d] flex flex-col">
+      {/* Zoom Controls */}
+      <div className="mb-4 flex gap-2 items-center">
+        <button
+          onClick={handleZoomIn}
+          className="p-2 bg-gray-700 hover:bg-gray-600 rounded text-white text-sm flex items-center gap-1 transition"
+          title="Zoom In (Scroll Up)"
+        >
+          <ZoomIn size={16} /> Zoom In
+        </button>
+        <button
+          onClick={handleZoomOut}
+          className="p-2 bg-gray-700 hover:bg-gray-600 rounded text-white text-sm flex items-center gap-1 transition"
+          title="Zoom Out (Scroll Down)"
+        >
+          <ZoomOut size={16} /> Zoom Out
+        </button>
+        <button
+          onClick={handleResetView}
+          className="p-2 bg-gray-700 hover:bg-gray-600 rounded text-white text-sm flex items-center gap-1 transition"
+          title="Reset View"
+        >
+          <RotateCcw size={16} /> Reset
+        </button>
+        <span className="text-gray-400 text-sm ml-auto">Zoom: {(zoom * 100).toFixed(0)}%</span>
+        <span className="text-gray-500 text-xs">| Scroll: Zoom | Middle-click: Pan</span>
+      </div>
+
+      {/* Legend */}
       <div className="mb-4 flex gap-4 text-sm">
         <div className="flex items-center gap-2">
           <div className="w-4 h-4 bg-green-900 rounded"></div>
@@ -73,13 +143,28 @@ export default function GridCanvas({ gridSize, obstacles, setObstacles, agents, 
           <span className="text-gray-300">Destination Zone</span>
         </div>
       </div>
+
+      {/* Grid Container with Zoom & Pan */}
       <div
-        className="grid gap-[1px] bg-gray-800 p-1 rounded-lg mx-auto relative"
-        style={{
-          gridTemplateColumns: `repeat(${gridSize}, 20px)`,
-          gridTemplateRows: `repeat(${gridSize}, 20px)`,
-          maxWidth: 'fit-content',
-        }}
+        ref={gridContainerRef}
+        className="flex-1 overflow-auto bg-gray-900 rounded-lg relative"
+        onWheel={handleWheel}
+        onMouseDown={handleMouseDown}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
+        onContextMenu={(e) => e.preventDefault()}
+      >
+        <div
+          className="grid gap-[1px] bg-gray-800 p-1 rounded-lg mx-auto relative inline-block"
+          style={{
+            gridTemplateColumns: `repeat(${gridSize}, ${cellSize}px)`,
+            gridTemplateRows: `repeat(${gridSize}, ${cellSize}px)`,
+            transform: `scale(${zoom}) translate(${pan.x / zoom}px, ${pan.y / zoom}px)`,
+            transformOrigin: '0 0',
+            transition: isPanning ? 'none' : 'transform 0.1s ease-out',
+            cursor: isPanning ? 'grabbing' : selectMode && selectMode !== 'none' ? 'crosshair' : 'default',
+          }}
       >
         {Array.from({ length: gridSize * gridSize }).map((_, idx) => {
           const x = idx % gridSize;
@@ -193,6 +278,7 @@ export default function GridCanvas({ gridSize, obstacles, setObstacles, agents, 
             />
           </motion.div>
         ))}
+        </div>
       </div>
     </div>
   );

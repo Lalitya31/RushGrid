@@ -4,6 +4,7 @@ import { Play, Pause, UserPlus, AlertTriangle, RotateCcw } from 'lucide-react';
 import GridCanvas from '../components/GridCanvas';
 import MetricsSidebar from '../components/MetricsSidebar';
 import RushBotPanel from '../components/RushBotPanel';
+import DeveloperFooter from '../components/DeveloperFooter';
 import { Agent, Algorithm } from '../types/agent';
 import { aStar, biAStar, dynamicAStar } from '../utils/pathfinding';
 
@@ -437,6 +438,7 @@ export default function Simulation() {
           }
         }}
       />
+      <DeveloperFooter />
     </div>
   );
 }
