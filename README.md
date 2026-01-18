@@ -1,5 +1,5 @@
-# RushGrid : 🔗 [https://rushgrid-app.vercel.app](https://rushgridfinal.vercel.app/)
-RushGrid- an adaptive multi-agent urban traffic routing simulator powered by A* , Bi-A* and Dynamic A* algorithms with real-time predictive re-routing, guided by our Ai co-pilot RushBot, built to help city planners , everyday travelers and millennials to save their time and work.
+<img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/8bc88111-9e6d-420b-a20f-eebd6dd53aee" /># RushGrid : 🔗 [https://rushgrid-app.vercel.app](https://rushgridfinal.vercel.app/)
+**RushGrid**- an adaptive multi-agent urban traffic routing simulator powered by A* , Bi-A* and Dynamic A* algorithms with real-time predictive re-routing, guided by our Ai co-pilot RushBot, built to help city planners , everyday travelers and millennials to save their time and work.
 🏎️ RushGrid: Adaptive Multi-Agent Dynamic Routing Visualizer
 Powered by the PathFuel Engine v1.0 and guided by our AI co-pilot RushBot,
 RushGrid demonstrates how modern pathfinding algorithms, real-time adaptation, and smart UI/UX design can tackle the chaos of urban congestion — one route at a time.
@@ -11,16 +11,16 @@ RushGrid is an interactive traffic simulation web app that visualizes multiple a
 Each agent reacts dynamically to congestion, blockages, and emergencies using intelligent routing algorithms — proving how adaptive heuristics outperform static algorithms like Dijkstra in real time.
 
 At its core, RushGrid is a perfect fusion of:
-💡 Algorithmic intelligence — A*, Bi-A*, Dynamic A*, and Dijkstra for comparison
-⚙️ Adaptive system design — self-learning edge weights and predictive rerouting
-🎨 Immersive Red Bull-inspired UI — neon-lit visuals, dark energy aesthetic
-🤖 Conversational AI (RushBot) — a built-in assistant that narrates, explains, and executes voice/text commands
+💡**Algorithmic intelligence** — A*, Bi-A*, Dynamic A*, and Dijkstra for comparison
+⚙️**Adaptive system design** — self-learning edge weights and predictive rerouting
+🎨 **Immersive Red Bull-inspired UI** — neon-lit visuals, dark energy aesthetic
+🤖 **Conversational AI (RushBot)** — a built-in assistant that narrates, explains, and executes voice/text commands
 🧩 Core Algorithmic Architecture
 
 🧭 PathFuel Engine v1.0
-A* – Primary pathfinding algorithm for all agents
-Bi-A* – Optimized bidirectional search for long-range routing
-Dynamic A* – Instant rerouting when road weights or traffic conditions change
+**A*** – Primary pathfinding algorithm for all agents
+**Bi-A*** – Optimized bidirectional search for long-range routing
+**Dynamic A*** – Instant rerouting when road weights or traffic conditions change
 CH + Landmarks – Conceptual preprocessing for microsecond-level queries
 
 Agent Personalities:
